@@ -1,15 +1,39 @@
-# Elysia with Bun runtime
+# Context Store API
 
-## Getting Started
-To get started with this template, simply paste this command into your terminal:
+A lightweight service for managing threads and messages for AI SDK driven LLM applications.
+
+## Quick Start
+
+1. Start the server
+
 ```bash
-bun create elysia ./elysia-example
+npx ctx-store
 ```
 
-## Development
-To start the development server run:
-```bash
-bun run dev
+2. Initialize the client
+
+```typescript
+import { createClient } from "@ctx-store/client";
+
+const ctxStore = createClient();
 ```
 
-Open http://localhost:3000/ with your browser to see the result.
+3. Create a thread and add a message
+
+```typescript
+const thread = await ctxStore.createThread();
+
+await ctxStore.addMessage(thread.id, {
+	role: "user",
+	content: "Hello, world!",
+});
+```
+
+4. Use together with AI SDK
+
+```typescript
+const { text } = await generateText({
+	model: "gpt-4o",
+	messages: [{ role: "user", content: "Hello, world!" }],
+});
+```

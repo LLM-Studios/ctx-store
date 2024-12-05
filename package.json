@@ -6,7 +6,7 @@
 		"dev": "bun run --watch src/index.ts",
 		"sync-openapi": "bun scripts/sync-openapi.ts",
 		"build": "bun build --outfile ./dist/server.js ./src/index.ts",
-		"build:executable": "bun build --compile --target bun --outfile server ./src/index.ts",
+		"build:executable": "bun build --compile --target bun --outfile ./dist/server ./src/index.ts",
 		"build:types": "tsc ./client/client.ts --declaration --emitDeclarationOnly --outDir ./dist --noEmitOnError --skipLibCheck",
 		"build:client": "bun build ./client/client.ts --outdir ./dist --target node --format esm",
 		"link": "bun run sync-openapi && bun build:types && bun build:client && bun link",
