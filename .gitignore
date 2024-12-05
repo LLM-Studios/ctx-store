@@ -44,4 +44,4 @@ package-lock.json
 
 server
 
-./dist
+./dist/*
