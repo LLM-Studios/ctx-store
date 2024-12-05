@@ -1,0 +1,3261 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Context Store API",
+    "description": "API for managing threads and messages",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Threads",
+      "description": "Thread management endpoints"
+    },
+    {
+      "name": "Messages",
+      "description": "Message management endpoints within threads"
+    }
+  ],
+  "paths": {
+    "/threads/{threadId}/messages/": {
+      "get": {
+        "parameters": [
+          {
+            "description": "The ID of the thread to retrieve messages from.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "threadId",
+            "required": true
+          },
+          {
+            "description": "Number of messages to return",
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false
+          },
+          {
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.",
+            "schema": {
+              "type": "string",
+              "pattern": "asc|desc"
+            },
+            "in": "query",
+            "name": "order",
+            "required": false
+          },
+          {
+            "description": "A cursor for use in pagination. `after` is a message ID defining the start of the page.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "after",
+            "required": false
+          },
+          {
+            "description": "A cursor for use in pagination. `before` is a message ID defining the end of the page.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "before",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "threadId": {
+                  "type": "string"
+                },
+                "content": {},
+                "role": {
+                  "anyOf": [
+                    {
+                      "const": "function",
+                      "type": "string"
+                    },
+                    {
+                      "const": "user",
+                      "type": "string"
+                    },
+                    {
+                      "const": "system",
+                      "type": "string"
+                    },
+                    {
+                      "const": "assistant",
+                      "type": "string"
+                    },
+                    {
+                      "const": "data",
+                      "type": "string"
+                    },
+                    {
+                      "const": "tool",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "createdAt": {
+                  "anyOf": [
+                    {
+                      "type": "Date"
+                    },
+                    {
+                      "format": "date",
+                      "default": "2024-11-24T18:27:01.336Z",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "default": "2024-11-24T18:27:01.336Z",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "updatedAt": {
+                  "anyOf": [
+                    {
+                      "type": "Date"
+                    },
+                    {
+                      "format": "date",
+                      "default": "2024-11-24T18:27:01.336Z",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "default": "2024-11-24T18:27:01.336Z",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "metadata": {
+                  "anyOf": [
+                    {},
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "threadId",
+                "content",
+                "role",
+                "createdAt",
+                "updatedAt"
+              ]
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "threadId": {
+                        "type": "string"
+                      },
+                      "content": {},
+                      "role": {
+                        "anyOf": [
+                          {
+                            "const": "function",
+                            "type": "string"
+                          },
+                          {
+                            "const": "user",
+                            "type": "string"
+                          },
+                          {
+                            "const": "system",
+                            "type": "string"
+                          },
+                          {
+                            "const": "assistant",
+                            "type": "string"
+                          },
+                          {
+                            "const": "data",
+                            "type": "string"
+                          },
+                          {
+                            "const": "tool",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "createdAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "updatedAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "metadata": {
+                        "anyOf": [
+                          {},
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "threadId",
+                      "content",
+                      "role",
+                      "createdAt",
+                      "updatedAt"
+                    ]
+                  }
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "threadId": {
+                        "type": "string"
+                      },
+                      "content": {},
+                      "role": {
+                        "anyOf": [
+                          {
+                            "const": "function",
+                            "type": "string"
+                          },
+                          {
+                            "const": "user",
+                            "type": "string"
+                          },
+                          {
+                            "const": "system",
+                            "type": "string"
+                          },
+                          {
+                            "const": "assistant",
+                            "type": "string"
+                          },
+                          {
+                            "const": "data",
+                            "type": "string"
+                          },
+                          {
+                            "const": "tool",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "createdAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "updatedAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "metadata": {
+                        "anyOf": [
+                          {},
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "threadId",
+                      "content",
+                      "role",
+                      "createdAt",
+                      "updatedAt"
+                    ]
+                  }
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "threadId": {
+                        "type": "string"
+                      },
+                      "content": {},
+                      "role": {
+                        "anyOf": [
+                          {
+                            "const": "function",
+                            "type": "string"
+                          },
+                          {
+                            "const": "user",
+                            "type": "string"
+                          },
+                          {
+                            "const": "system",
+                            "type": "string"
+                          },
+                          {
+                            "const": "assistant",
+                            "type": "string"
+                          },
+                          {
+                            "const": "data",
+                            "type": "string"
+                          },
+                          {
+                            "const": "tool",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "createdAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "updatedAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "metadata": {
+                        "anyOf": [
+                          {},
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "threadId",
+                      "content",
+                      "role",
+                      "createdAt",
+                      "updatedAt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listMessages",
+        "tags": [
+          "Messages"
+        ],
+        "summary": "List messages in thread",
+        "description": "Retrieves a paginated list of messages in a specific thread"
+      },
+      "post": {
+        "parameters": [
+          {
+            "description": "The ID of the thread to create the message in.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "threadId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "threadId": {
+                  "type": "string"
+                },
+                "content": {},
+                "role": {
+                  "anyOf": [
+                    {
+                      "const": "function",
+                      "type": "string"
+                    },
+                    {
+                      "const": "user",
+                      "type": "string"
+                    },
+                    {
+                      "const": "system",
+                      "type": "string"
+                    },
+                    {
+                      "const": "assistant",
+                      "type": "string"
+                    },
+                    {
+                      "const": "data",
+                      "type": "string"
+                    },
+                    {
+                      "const": "tool",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "createdAt": {
+                  "anyOf": [
+                    {
+                      "type": "Date"
+                    },
+                    {
+                      "format": "date",
+                      "default": "2024-11-24T18:27:01.336Z",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "default": "2024-11-24T18:27:01.336Z",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "updatedAt": {
+                  "anyOf": [
+                    {
+                      "type": "Date"
+                    },
+                    {
+                      "format": "date",
+                      "default": "2024-11-24T18:27:01.336Z",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "default": "2024-11-24T18:27:01.336Z",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "metadata": {
+                  "anyOf": [
+                    {},
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "threadId",
+                "content",
+                "role",
+                "createdAt",
+                "updatedAt"
+              ]
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "threadId": {
+                        "type": "string"
+                      },
+                      "content": {},
+                      "role": {
+                        "anyOf": [
+                          {
+                            "const": "function",
+                            "type": "string"
+                          },
+                          {
+                            "const": "user",
+                            "type": "string"
+                          },
+                          {
+                            "const": "system",
+                            "type": "string"
+                          },
+                          {
+                            "const": "assistant",
+                            "type": "string"
+                          },
+                          {
+                            "const": "data",
+                            "type": "string"
+                          },
+                          {
+                            "const": "tool",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "createdAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "updatedAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "metadata": {
+                        "anyOf": [
+                          {},
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "threadId",
+                      "content",
+                      "role",
+                      "createdAt",
+                      "updatedAt"
+                    ]
+                  }
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "threadId": {
+                        "type": "string"
+                      },
+                      "content": {},
+                      "role": {
+                        "anyOf": [
+                          {
+                            "const": "function",
+                            "type": "string"
+                          },
+                          {
+                            "const": "user",
+                            "type": "string"
+                          },
+                          {
+                            "const": "system",
+                            "type": "string"
+                          },
+                          {
+                            "const": "assistant",
+                            "type": "string"
+                          },
+                          {
+                            "const": "data",
+                            "type": "string"
+                          },
+                          {
+                            "const": "tool",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "createdAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "updatedAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "metadata": {
+                        "anyOf": [
+                          {},
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "threadId",
+                      "content",
+                      "role",
+                      "createdAt",
+                      "updatedAt"
+                    ]
+                  }
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "threadId": {
+                        "type": "string"
+                      },
+                      "content": {},
+                      "role": {
+                        "anyOf": [
+                          {
+                            "const": "function",
+                            "type": "string"
+                          },
+                          {
+                            "const": "user",
+                            "type": "string"
+                          },
+                          {
+                            "const": "system",
+                            "type": "string"
+                          },
+                          {
+                            "const": "assistant",
+                            "type": "string"
+                          },
+                          {
+                            "const": "data",
+                            "type": "string"
+                          },
+                          {
+                            "const": "tool",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "createdAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "updatedAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "metadata": {
+                        "anyOf": [
+                          {},
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "threadId",
+                      "content",
+                      "role",
+                      "createdAt",
+                      "updatedAt"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createMessages",
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Create messages",
+        "description": "Creates new messages in a specified thread with the provided content and metadata.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "An array of message objects to create. Each message object must include a `role` and `content` property.",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "role": {
+                      "description": "The role of the message sender (function, user, system, assistant, data, tool).",
+                      "anyOf": [
+                        {
+                          "const": "function",
+                          "type": "string"
+                        },
+                        {
+                          "const": "user",
+                          "type": "string"
+                        },
+                        {
+                          "const": "system",
+                          "type": "string"
+                        },
+                        {
+                          "const": "assistant",
+                          "type": "string"
+                        },
+                        {
+                          "const": "data",
+                          "type": "string"
+                        },
+                        {
+                          "const": "tool",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "content": {
+                      "description": "The content of the message. Can be any valid JSON value (string, object, array, etc.)."
+                    },
+                    "metadata": {
+                      "description": "Optional metadata associated with the message. Can be any valid JSON value."
+                    }
+                  },
+                  "required": [
+                    "role",
+                    "content"
+                  ]
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "description": "An array of message objects to create. Each message object must include a `role` and `content` property.",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "role": {
+                      "description": "The role of the message sender (function, user, system, assistant, data, tool).",
+                      "anyOf": [
+                        {
+                          "const": "function",
+                          "type": "string"
+                        },
+                        {
+                          "const": "user",
+                          "type": "string"
+                        },
+                        {
+                          "const": "system",
+                          "type": "string"
+                        },
+                        {
+                          "const": "assistant",
+                          "type": "string"
+                        },
+                        {
+                          "const": "data",
+                          "type": "string"
+                        },
+                        {
+                          "const": "tool",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "content": {
+                      "description": "The content of the message. Can be any valid JSON value (string, object, array, etc.)."
+                    },
+                    "metadata": {
+                      "description": "Optional metadata associated with the message. Can be any valid JSON value."
+                    }
+                  },
+                  "required": [
+                    "role",
+                    "content"
+                  ]
+                }
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "description": "An array of message objects to create. Each message object must include a `role` and `content` property.",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "role": {
+                      "description": "The role of the message sender (function, user, system, assistant, data, tool).",
+                      "anyOf": [
+                        {
+                          "const": "function",
+                          "type": "string"
+                        },
+                        {
+                          "const": "user",
+                          "type": "string"
+                        },
+                        {
+                          "const": "system",
+                          "type": "string"
+                        },
+                        {
+                          "const": "assistant",
+                          "type": "string"
+                        },
+                        {
+                          "const": "data",
+                          "type": "string"
+                        },
+                        {
+                          "const": "tool",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "content": {
+                      "description": "The content of the message. Can be any valid JSON value (string, object, array, etc.)."
+                    },
+                    "metadata": {
+                      "description": "Optional metadata associated with the message. Can be any valid JSON value."
+                    }
+                  },
+                  "required": [
+                    "role",
+                    "content"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/messages/{messageId}": {
+      "get": {
+        "parameters": [
+          {
+            "description": "The ID of the thread to retrieve messages from.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "threadId",
+            "required": true
+          },
+          {
+            "description": "The ID of the message to retrieve.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "messageId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "threadId": {
+                      "type": "string"
+                    },
+                    "content": {},
+                    "role": {
+                      "anyOf": [
+                        {
+                          "const": "function",
+                          "type": "string"
+                        },
+                        {
+                          "const": "user",
+                          "type": "string"
+                        },
+                        {
+                          "const": "system",
+                          "type": "string"
+                        },
+                        {
+                          "const": "assistant",
+                          "type": "string"
+                        },
+                        {
+                          "const": "data",
+                          "type": "string"
+                        },
+                        {
+                          "const": "tool",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "threadId",
+                    "content",
+                    "role",
+                    "createdAt",
+                    "updatedAt"
+                  ]
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "threadId": {
+                      "type": "string"
+                    },
+                    "content": {},
+                    "role": {
+                      "anyOf": [
+                        {
+                          "const": "function",
+                          "type": "string"
+                        },
+                        {
+                          "const": "user",
+                          "type": "string"
+                        },
+                        {
+                          "const": "system",
+                          "type": "string"
+                        },
+                        {
+                          "const": "assistant",
+                          "type": "string"
+                        },
+                        {
+                          "const": "data",
+                          "type": "string"
+                        },
+                        {
+                          "const": "tool",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "threadId",
+                    "content",
+                    "role",
+                    "createdAt",
+                    "updatedAt"
+                  ]
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "threadId": {
+                      "type": "string"
+                    },
+                    "content": {},
+                    "role": {
+                      "anyOf": [
+                        {
+                          "const": "function",
+                          "type": "string"
+                        },
+                        {
+                          "const": "user",
+                          "type": "string"
+                        },
+                        {
+                          "const": "system",
+                          "type": "string"
+                        },
+                        {
+                          "const": "assistant",
+                          "type": "string"
+                        },
+                        {
+                          "const": "data",
+                          "type": "string"
+                        },
+                        {
+                          "const": "tool",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "threadId",
+                    "content",
+                    "role",
+                    "createdAt",
+                    "updatedAt"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getMessage",
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Get a specific message",
+        "description": "Retrieves a specific message from a thread by its ID. Returns a 404 error if the message is not found."
+      },
+      "patch": {
+        "parameters": [
+          {
+            "description": "The ID of the thread containing the message.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "threadId",
+            "required": true
+          },
+          {
+            "description": "The ID of the message to update.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "messageId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "threadId": {
+                      "type": "string"
+                    },
+                    "content": {},
+                    "role": {
+                      "anyOf": [
+                        {
+                          "const": "function",
+                          "type": "string"
+                        },
+                        {
+                          "const": "user",
+                          "type": "string"
+                        },
+                        {
+                          "const": "system",
+                          "type": "string"
+                        },
+                        {
+                          "const": "assistant",
+                          "type": "string"
+                        },
+                        {
+                          "const": "data",
+                          "type": "string"
+                        },
+                        {
+                          "const": "tool",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "threadId",
+                    "content",
+                    "role",
+                    "createdAt",
+                    "updatedAt"
+                  ]
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "threadId": {
+                      "type": "string"
+                    },
+                    "content": {},
+                    "role": {
+                      "anyOf": [
+                        {
+                          "const": "function",
+                          "type": "string"
+                        },
+                        {
+                          "const": "user",
+                          "type": "string"
+                        },
+                        {
+                          "const": "system",
+                          "type": "string"
+                        },
+                        {
+                          "const": "assistant",
+                          "type": "string"
+                        },
+                        {
+                          "const": "data",
+                          "type": "string"
+                        },
+                        {
+                          "const": "tool",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "threadId",
+                    "content",
+                    "role",
+                    "createdAt",
+                    "updatedAt"
+                  ]
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "threadId": {
+                      "type": "string"
+                    },
+                    "content": {},
+                    "role": {
+                      "anyOf": [
+                        {
+                          "const": "function",
+                          "type": "string"
+                        },
+                        {
+                          "const": "user",
+                          "type": "string"
+                        },
+                        {
+                          "const": "system",
+                          "type": "string"
+                        },
+                        {
+                          "const": "assistant",
+                          "type": "string"
+                        },
+                        {
+                          "const": "data",
+                          "type": "string"
+                        },
+                        {
+                          "const": "tool",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "threadId",
+                    "content",
+                    "role",
+                    "createdAt",
+                    "updatedAt"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "updateMessage",
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Update a message",
+        "description": "Updates the content and/or metadata of an existing message. Only the provided fields will be updated.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "description": "New content to update the message with. Can be any valid JSON value."
+                  },
+                  "metadata": {
+                    "description": "New metadata to update the message with. Can be any valid JSON value."
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "description": "New content to update the message with. Can be any valid JSON value."
+                  },
+                  "metadata": {
+                    "description": "New metadata to update the message with. Can be any valid JSON value."
+                  }
+                }
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "description": "New content to update the message with. Can be any valid JSON value."
+                  },
+                  "metadata": {
+                    "description": "New metadata to update the message with. Can be any valid JSON value."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "description": "The ID of the thread containing the message to delete.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "threadId",
+            "required": true
+          },
+          {
+            "description": "The ID of the message to delete.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "messageId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "deleteMessage",
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Delete a message",
+        "description": "Permanently deletes a message from a thread. This action cannot be undone."
+      }
+    },
+    "/threads/{threadId}/": {
+      "get": {
+        "parameters": [
+          {
+            "description": "The ID of the thread to retrieve.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "threadId",
+            "required": true
+          },
+          {
+            "description": "Whether to include the most recent messages in the response.",
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "includeMessages",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "Messages": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "threadId": {
+                            "type": "string"
+                          },
+                          "content": {},
+                          "role": {
+                            "anyOf": [
+                              {
+                                "const": "function",
+                                "type": "string"
+                              },
+                              {
+                                "const": "user",
+                                "type": "string"
+                              },
+                              {
+                                "const": "system",
+                                "type": "string"
+                              },
+                              {
+                                "const": "assistant",
+                                "type": "string"
+                              },
+                              {
+                                "const": "data",
+                                "type": "string"
+                              },
+                              {
+                                "const": "tool",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "createdAt": {
+                            "anyOf": [
+                              {
+                                "type": "Date"
+                              },
+                              {
+                                "format": "date",
+                                "default": "2024-11-24T18:27:01.336Z",
+                                "type": "string"
+                              },
+                              {
+                                "format": "date-time",
+                                "default": "2024-11-24T18:27:01.336Z",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "updatedAt": {
+                            "anyOf": [
+                              {
+                                "type": "Date"
+                              },
+                              {
+                                "format": "date",
+                                "default": "2024-11-24T18:27:01.336Z",
+                                "type": "string"
+                              },
+                              {
+                                "format": "date-time",
+                                "default": "2024-11-24T18:27:01.336Z",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "metadata": {
+                            "anyOf": [
+                              {},
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "threadId",
+                          "content",
+                          "role",
+                          "createdAt",
+                          "updatedAt"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "createdAt",
+                    "updatedAt",
+                    "Messages"
+                  ]
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "Messages": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "threadId": {
+                            "type": "string"
+                          },
+                          "content": {},
+                          "role": {
+                            "anyOf": [
+                              {
+                                "const": "function",
+                                "type": "string"
+                              },
+                              {
+                                "const": "user",
+                                "type": "string"
+                              },
+                              {
+                                "const": "system",
+                                "type": "string"
+                              },
+                              {
+                                "const": "assistant",
+                                "type": "string"
+                              },
+                              {
+                                "const": "data",
+                                "type": "string"
+                              },
+                              {
+                                "const": "tool",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "createdAt": {
+                            "anyOf": [
+                              {
+                                "type": "Date"
+                              },
+                              {
+                                "format": "date",
+                                "default": "2024-11-24T18:27:01.336Z",
+                                "type": "string"
+                              },
+                              {
+                                "format": "date-time",
+                                "default": "2024-11-24T18:27:01.336Z",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "updatedAt": {
+                            "anyOf": [
+                              {
+                                "type": "Date"
+                              },
+                              {
+                                "format": "date",
+                                "default": "2024-11-24T18:27:01.336Z",
+                                "type": "string"
+                              },
+                              {
+                                "format": "date-time",
+                                "default": "2024-11-24T18:27:01.336Z",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "metadata": {
+                            "anyOf": [
+                              {},
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "threadId",
+                          "content",
+                          "role",
+                          "createdAt",
+                          "updatedAt"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "createdAt",
+                    "updatedAt",
+                    "Messages"
+                  ]
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "Messages": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "threadId": {
+                            "type": "string"
+                          },
+                          "content": {},
+                          "role": {
+                            "anyOf": [
+                              {
+                                "const": "function",
+                                "type": "string"
+                              },
+                              {
+                                "const": "user",
+                                "type": "string"
+                              },
+                              {
+                                "const": "system",
+                                "type": "string"
+                              },
+                              {
+                                "const": "assistant",
+                                "type": "string"
+                              },
+                              {
+                                "const": "data",
+                                "type": "string"
+                              },
+                              {
+                                "const": "tool",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "createdAt": {
+                            "anyOf": [
+                              {
+                                "type": "Date"
+                              },
+                              {
+                                "format": "date",
+                                "default": "2024-11-24T18:27:01.336Z",
+                                "type": "string"
+                              },
+                              {
+                                "format": "date-time",
+                                "default": "2024-11-24T18:27:01.336Z",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "updatedAt": {
+                            "anyOf": [
+                              {
+                                "type": "Date"
+                              },
+                              {
+                                "format": "date",
+                                "default": "2024-11-24T18:27:01.336Z",
+                                "type": "string"
+                              },
+                              {
+                                "format": "date-time",
+                                "default": "2024-11-24T18:27:01.336Z",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "metadata": {
+                            "anyOf": [
+                              {},
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "threadId",
+                          "content",
+                          "role",
+                          "createdAt",
+                          "updatedAt"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "createdAt",
+                    "updatedAt",
+                    "Messages"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getThread",
+        "tags": [
+          "Threads"
+        ],
+        "summary": "Get a specific thread",
+        "description": "Retrieves a thread by ID, optionally including its most recent messages."
+      },
+      "patch": {
+        "parameters": [
+          {
+            "description": "The ID of the thread to update.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "threadId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "createdAt",
+                    "updatedAt"
+                  ]
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "createdAt",
+                    "updatedAt"
+                  ]
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "createdAt",
+                    "updatedAt"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "updateThread",
+        "tags": [
+          "Threads"
+        ],
+        "summary": "Update a thread",
+        "description": "Updates a thread's title or metadata. Only the provided fields will be updated.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "description": "New title for the thread.",
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "description": "Optional metadata associated with the thread. Can be any valid JSON value."
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "description": "New title for the thread.",
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "description": "Optional metadata associated with the thread. Can be any valid JSON value."
+                  }
+                }
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "description": "New title for the thread.",
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "description": "Optional metadata associated with the thread. Can be any valid JSON value."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "description": "The ID of the thread to delete.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "threadId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "deleteThread",
+        "tags": [
+          "Threads"
+        ],
+        "summary": "Delete a thread",
+        "description": "Permanently deletes a thread and all its associated messages. This action cannot be undone."
+      }
+    },
+    "/threads/": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Number of threads to return. Defaults to 50.",
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false
+          },
+          {
+            "description": "Sort order by creation timestamp. 'asc' for ascending order and 'desc' for descending order.",
+            "schema": {
+              "anyOf": [
+                {
+                  "const": "asc",
+                  "type": "string"
+                },
+                {
+                  "const": "desc",
+                  "type": "string"
+                }
+              ]
+            },
+            "in": "query",
+            "name": "order",
+            "required": false
+          },
+          {
+            "description": "A cursor for pagination. Returns threads created before this timestamp.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "before",
+            "required": false
+          },
+          {
+            "description": "A cursor for pagination. Returns threads created after this timestamp.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "after",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "createdAt": {
+                  "anyOf": [
+                    {
+                      "type": "Date"
+                    },
+                    {
+                      "format": "date",
+                      "default": "2024-11-24T18:27:01.336Z",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "default": "2024-11-24T18:27:01.336Z",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "updatedAt": {
+                  "anyOf": [
+                    {
+                      "type": "Date"
+                    },
+                    {
+                      "format": "date",
+                      "default": "2024-11-24T18:27:01.336Z",
+                      "type": "string"
+                    },
+                    {
+                      "format": "date-time",
+                      "default": "2024-11-24T18:27:01.336Z",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "metadata": {
+                  "anyOf": [
+                    {},
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "_count": {
+                  "type": "object",
+                  "properties": {
+                    "Messages": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "Messages"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "createdAt",
+                "updatedAt",
+                "_count"
+              ]
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "createdAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "updatedAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "metadata": {
+                        "anyOf": [
+                          {},
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "_count": {
+                        "type": "object",
+                        "properties": {
+                          "Messages": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "Messages"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "createdAt",
+                      "updatedAt",
+                      "_count"
+                    ]
+                  }
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "createdAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "updatedAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "metadata": {
+                        "anyOf": [
+                          {},
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "_count": {
+                        "type": "object",
+                        "properties": {
+                          "Messages": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "Messages"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "createdAt",
+                      "updatedAt",
+                      "_count"
+                    ]
+                  }
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "createdAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "updatedAt": {
+                        "anyOf": [
+                          {
+                            "type": "Date"
+                          },
+                          {
+                            "format": "date",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          },
+                          {
+                            "format": "date-time",
+                            "default": "2024-11-24T18:27:01.336Z",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "metadata": {
+                        "anyOf": [
+                          {},
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "_count": {
+                        "type": "object",
+                        "properties": {
+                          "Messages": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "Messages"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "createdAt",
+                      "updatedAt",
+                      "_count"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listThreads",
+        "tags": [
+          "Threads"
+        ],
+        "summary": "List all threads",
+        "description": "Retrieves a paginated list of threads with their message counts."
+      },
+      "post": {
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "createdAt",
+                    "updatedAt"
+                  ]
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "createdAt",
+                    "updatedAt"
+                  ]
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "updatedAt": {
+                      "anyOf": [
+                        {
+                          "type": "Date"
+                        },
+                        {
+                          "format": "date",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "default": "2024-11-24T18:27:01.336Z",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "metadata": {
+                      "anyOf": [
+                        {},
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "createdAt",
+                    "updatedAt"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createThread",
+        "tags": [
+          "Threads"
+        ],
+        "summary": "Create a thread",
+        "description": "Creates a new thread with the provided title and metadata.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "description": "Title of the thread.",
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "description": "Optional metadata associated with the thread. Can be any valid JSON value."
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "description": "Title of the thread.",
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "description": "Optional metadata associated with the thread. Can be any valid JSON value."
+                  }
+                }
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "description": "Title of the thread.",
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "description": "Optional metadata associated with the thread. Can be any valid JSON value."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
