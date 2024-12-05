@@ -26,9 +26,9 @@
 		"ctx-store": "./dist/server.js"
 	},
 	"files": [
-		"./dist/server.js",
-		"./dist/client.js",
-		"./dist/client.d.ts"
+		"dist/server.js",
+		"dist/client.js",
+		"dist/client.d.ts"
 	],
 	"dependencies": {
 		"@elysiajs/eden": "^1.1.3",
