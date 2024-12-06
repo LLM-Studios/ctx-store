@@ -1,8 +1,8 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 
 import { MessageRole } from "@prisma/client";
-import * as fetchClient from "./index";
-import { CreateThreadData, UpdateThreadData } from "./index";
+import * as fetchClient from "./generated/index";
+import { CreateThreadData, UpdateThreadData } from "./generated/index";
 
 const getThread = (threadId: string, includeMessages = true) => {
 	return fetchClient

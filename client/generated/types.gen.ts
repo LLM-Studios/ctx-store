@@ -32,8 +32,8 @@ export type ListMessagesResponse = (Array<{
     threadId: string;
     content: unknown;
     role: ("function" | "user" | "system" | "assistant" | "data" | "tool");
-    createdAt: (Date | string);
-    updatedAt: (Date | string);
+    createdAt: (Date | string | number);
+    updatedAt: (Date | string | number);
     metadata?: (unknown | null);
 }>);
 
@@ -67,8 +67,8 @@ export type CreateMessagesResponse = (Array<{
     threadId: string;
     content: unknown;
     role: ("function" | "user" | "system" | "assistant" | "data" | "tool");
-    createdAt: (Date | string);
-    updatedAt: (Date | string);
+    createdAt: (Date | string | number);
+    updatedAt: (Date | string | number);
     metadata?: (unknown | null);
 }>);
 
@@ -92,8 +92,8 @@ export type GetMessageResponse = ({
     threadId: string;
     content: unknown;
     role: ("function" | "user" | "system" | "assistant" | "data" | "tool");
-    createdAt: (Date | string);
-    updatedAt: (Date | string);
+    createdAt: (Date | string | number);
+    updatedAt: (Date | string | number);
     metadata?: (unknown | null);
 });
 
@@ -127,8 +127,8 @@ export type UpdateMessageResponse = ({
     threadId: string;
     content: unknown;
     role: ("function" | "user" | "system" | "assistant" | "data" | "tool");
-    createdAt: (Date | string);
-    updatedAt: (Date | string);
+    createdAt: (Date | string | number);
+    updatedAt: (Date | string | number);
     metadata?: (unknown | null);
 });
 
@@ -171,16 +171,16 @@ export type GetThreadData = {
 export type GetThreadResponse = ({
     id: string;
     title?: (string | null);
-    createdAt: (Date | string);
-    updatedAt: (Date | string);
+    createdAt: (Date | string | number);
+    updatedAt: (Date | string | number);
     metadata?: (unknown | null);
     Messages: Array<{
         id: string;
         threadId: string;
         content: unknown;
         role: ("function" | "user" | "system" | "assistant" | "data" | "tool");
-        createdAt: (Date | string);
-        updatedAt: (Date | string);
+        createdAt: (Date | string | number);
+        updatedAt: (Date | string | number);
         metadata?: (unknown | null);
     }>;
 });
@@ -209,8 +209,8 @@ export type UpdateThreadData = {
 export type UpdateThreadResponse = ({
     id: string;
     title?: (string | null);
-    createdAt: (Date | string);
-    updatedAt: (Date | string);
+    createdAt: (Date | string | number);
+    updatedAt: (Date | string | number);
     metadata?: (unknown | null);
 });
 
@@ -255,8 +255,8 @@ export type ListThreadsData = {
 export type ListThreadsResponse = (Array<{
     id: string;
     title?: (string | null);
-    createdAt: (Date | string);
-    updatedAt: (Date | string);
+    createdAt: (Date | string | number);
+    updatedAt: (Date | string | number);
     metadata?: (unknown | null);
     _count: {
         Messages: number;
@@ -281,8 +281,8 @@ export type CreateThreadData = {
 export type CreateThreadResponse = ({
     id: string;
     title?: (string | null);
-    createdAt: (Date | string);
-    updatedAt: (Date | string);
+    createdAt: (Date | string | number);
+    updatedAt: (Date | string | number);
     metadata?: (unknown | null);
 });
 
