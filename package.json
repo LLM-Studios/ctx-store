@@ -11,6 +11,7 @@
 		"build:client": "bun build ./client/client.ts --outdir ./dist --target node --format esm",
 		"link": "bun run sync-openapi && bun build:types && bun build:client && bun run build && bun link",
 		"prepublish": "bun run sync-openapi && bun build:types && bun build:client && bun run build",
+		"start": "bun ./dist/server.js",
 		"----DATABASE----": "",
 		"db:migrate": "prisma migrate dev",
 		"db:studio": "prisma studio",
@@ -20,7 +21,8 @@
 		"----DOCKER----": "",
 		"docker:build": "docker build -t llmstudios/ctx-store:latest .",
 		"docker:push": "docker push llmstudios/ctx-store:latest",
-		"docker:publish": "npm run docker:build && npm run docker:push"
+		"docker:publish": "npm run docker:build && npm run docker:push",
+		"docker:run": "docker run -p 3003:3003 llmstudios/ctx-store:latest"
 	},
 	"bin": {
 		"ctx-store": "./dist/server.js"

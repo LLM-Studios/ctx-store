@@ -30,10 +30,10 @@ RUN bun run build
 
 # copy production dependencies and source code into final image
 FROM base AS release
-COPY --from=prerelease /usr/src/app/server .
+COPY --from=prerelease /usr/src/app/dist .
 COPY --from=install /temp/prod/node_modules/.prisma ./node_modules/.prisma
 
 # run the app
 USER bun
 EXPOSE 3000/tcp
-ENTRYPOINT [ "./server" ]
+ENTRYPOINT [ "bun", "run", "start" ]
