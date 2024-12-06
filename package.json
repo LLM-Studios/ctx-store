@@ -1,6 +1,6 @@
 {
 	"name": "@llmstudios/ctx-store",
-	"version": "1.0.56",
+	"version": "1.0.57",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "bun run --watch src/index.ts",
