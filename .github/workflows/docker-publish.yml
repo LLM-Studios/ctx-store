@@ -1,6 +1,8 @@
-name: Docker Build and Publish
+name: Build and Publish
 
 on:
+  release:
+    types: [published]
   push:
     branches: ["main"]
     paths:
@@ -63,8 +65,11 @@ jobs:
   publish-npm:
     needs: [build-and-test, check-version]
     runs-on: ubuntu-latest
-    # Only publish on push to main when version has changed
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.check-version.outputs.version_changed == 'true'
+    permissions:
+      contents: read
+      id-token: write
+    # Only publish on release or when version changes in main
+    if: (github.event_name == 'release' && github.event.action == 'published') || (github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.check-version.outputs.version_changed == 'true')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -93,15 +98,15 @@ jobs:
           path: dist/
 
       - name: Publish to npm
-        run: npm publish --access public
+        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   build-and-push:
     needs: [build-and-test, check-version]
     runs-on: ubuntu-latest
-    # Only push Docker image when version has changed
-    if: needs.check-version.outputs.version_changed == 'true'
+    # Only push Docker image on release or when version changes in main
+    if: (github.event_name == 'release' && github.event.action == 'published') || (github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.check-version.outputs.version_changed == 'true')
     permissions:
       contents: read
       packages: write
