@@ -2,9 +2,7 @@ version: "3.8"
 
 services:
   api:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/llm-studios/ctx-store:main
     ports:
       - "3003:3003"
     environment:
