@@ -11,6 +11,7 @@
 		"build:client": "bun build ./client/client.ts --outdir ./dist --target node --format esm",
 		"link": "bun run sync-openapi && bun build:types && bun build:client && bun run build && bun link",
 		"prepublish": "bun run sync-openapi && bun build:types && bun build:client && bun run build",
+		"publish": "bun publish --access public",
 		"start": "bun ./dist/server.js",
 		"----DATABASE----": "",
 		"db:migrate": "prisma migrate dev",

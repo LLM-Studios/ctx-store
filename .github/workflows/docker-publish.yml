@@ -3,6 +3,8 @@ name: Docker Build and Publish
 on:
   push:
     branches: ["main"]
+    paths:
+      - "package.json"
   pull_request:
     branches: ["main"]
 
@@ -11,6 +13,30 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version_changed: ${{ steps.check.outputs.version_changed }}
+      version: ${{ steps.check.outputs.version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check if version changed
+        id: check
+        run: |
+          CURRENT_VERSION=$(jq -r .version package.json)
+          git checkout HEAD^1
+          PREVIOUS_VERSION=$(jq -r .version package.json)
+          if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
+            echo "version_changed=true" >> "$GITHUB_OUTPUT"
+            echo "version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
+          else
+            echo "version_changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
   build-and-test:
     runs-on: ubuntu-latest
     steps:
@@ -34,9 +60,40 @@ jobs:
           name: dist
           path: dist/
 
-  build-and-push:
-    needs: build-and-test
+  publish-npm:
+    needs: [build-and-test, check-version]
     runs-on: ubuntu-latest
+    # Only publish on push to main when version has changed
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.check-version.outputs.version_changed == 'true'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Download dist
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist/
+
+      - name: Setup npm authentication
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      - name: Publish to npm
+        run: bun run publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  build-and-push:
+    needs: [build-and-test, check-version]
+    runs-on: ubuntu-latest
+    # Only push Docker image when version has changed
+    if: needs.check-version.outputs.version_changed == 'true'
     permissions:
       contents: read
       packages: write
@@ -69,6 +126,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=${{ needs.check-version.outputs.version }}
+            type=raw,value=latest
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
