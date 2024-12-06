@@ -1,10 +1,12 @@
+#!/usr/bin/env node
+
 // node_modules/@hey-api/client-fetch/dist/index.js
 var T = /\{[^{}]+\}/g;
 var h = ({ allowReserved: i, name: n, value: e }) => {
   if (e == null)
     return "";
   if (typeof e == "object")
-    throw new Error("Deeply-nested arrays/objects aren\u2019t supported. Provide your own `querySerializer()` to handle these.");
+    throw new Error("Deeply-nested arrays/objects aren’t supported. Provide your own `querySerializer()` to handle these.");
   return `${n}=${i ? e : encodeURIComponent(e)}`;
 };
 var U = (i) => {
@@ -289,9 +291,6 @@ var createThread = (options) => {
   });
 };
 // client/client.ts
-client.setConfig({
-  baseUrl: process.env.API_URL ?? "http://localhost:3003"
-});
 var getThread2 = (threadId, includeMessages = true) => {
   return getThread({
     path: { threadId },
@@ -343,15 +342,23 @@ var deleteMessage2 = (threadId, messageId) => {
     path: { threadId, messageId }
   }).then((res) => res.data);
 };
+var createClient = (config) => {
+  client.setConfig({
+    baseUrl: config?.baseUrl ?? process.env.API_URL ?? "http://localhost:3003"
+  });
+  return {
+    getThread: getThread2,
+    listThreads: listThreads2,
+    createThread: createThread2,
+    updateThread: updateThread2,
+    deleteThread: deleteThread2,
+    getMessage: getMessage2,
+    listMessages: listMessages2,
+    createMessages: createMessages2,
+    updateMessage: updateMessage2,
+    deleteMessage: deleteMessage2
+  };
+};
 export {
-  updateThread2 as updateThread,
-  updateMessage2 as updateMessage,
-  listThreads2 as listThreads,
-  listMessages2 as listMessages,
-  getThread2 as getThread,
-  getMessage2 as getMessage,
-  deleteThread2 as deleteThread,
-  deleteMessage2 as deleteMessage,
-  createThread2 as createThread,
-  createMessages2 as createMessages
+  createClient
 };

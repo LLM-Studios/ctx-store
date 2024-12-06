@@ -4,10 +4,6 @@ import { MessageRole } from "@prisma/client";
 import * as fetchClient from "./index";
 import { CreateThreadData, UpdateThreadData } from "./index";
 
-fetchClient.client.setConfig({
-	baseUrl: process.env.API_URL ?? "http://localhost:3003",
-});
-
 const getThread = (threadId: string, includeMessages = true) => {
 	return fetchClient
 		.getThread({
@@ -107,15 +103,21 @@ const deleteMessage = (threadId: string, messageId: string) => {
 		.then((res) => res.data);
 };
 
-export {
-	getThread,
-	listThreads,
-	createThread,
-	updateThread,
-	deleteThread,
-	getMessage,
-	listMessages,
-	createMessages,
-	updateMessage,
-	deleteMessage,
+export const createClient = (config?: { baseUrl?: string }) => {
+	fetchClient.client.setConfig({
+		baseUrl: config?.baseUrl ?? process.env.API_URL ?? "http://localhost:3003",
+	});
+
+	return {
+		getThread,
+		listThreads,
+		createThread,
+		updateThread,
+		deleteThread,
+		getMessage,
+		listMessages,
+		createMessages,
+		updateMessage,
+		deleteMessage,
+	};
 };

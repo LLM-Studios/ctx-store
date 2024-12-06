@@ -9,7 +9,7 @@
 		"build:executable": "bun build --compile --target bun --outfile ./dist/server ./src/index.ts",
 		"build:types": "tsc ./client/client.ts --declaration --emitDeclarationOnly --outDir ./dist --noEmitOnError --skipLibCheck",
 		"build:client": "bun build ./client/client.ts --outdir ./dist --target node --format esm",
-		"link": "bun run sync-openapi && bun build:types && bun build:client && bun link",
+		"link": "bun run sync-openapi && bun build:types && bun build:client && bun run build && bun link",
 		"prepublish": "bun run sync-openapi && bun build:types && bun build:client",
 		"----DATABASE----": "",
 		"db:migrate": "prisma migrate dev",
@@ -49,5 +49,9 @@
 			"types": "./dist/client.d.ts"
 		}
 	},
-	"main": "./dist/client.js"
+	"main": "./dist/client.js",
+	"publishConfig": {
+		"access": "public"
+	},
+	"type": "module"
 }

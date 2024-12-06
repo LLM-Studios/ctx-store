@@ -1,3 +1,5 @@
+#!/usr/bin/env bun
+// @bun
 var __create = Object.create;
 var __getProtoOf = Object.getPrototypeOf;
 var __defProp = Object.defineProperty;
