@@ -1,6 +1,6 @@
 {
 	"name": "@llmstudios/ctx-store",
-	"version": "1.0.50",
+	"version": "1.0.51",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "bun run --watch src/index.ts",
@@ -10,7 +10,7 @@
 		"build:types": "tsc ./client/client.ts --declaration --emitDeclarationOnly --outDir ./dist --noEmitOnError --skipLibCheck",
 		"build:client": "bun build ./client/client.ts --outdir ./dist --target node --format esm",
 		"link": "bun run sync-openapi && bun build:types && bun build:client && bun run build && bun link",
-		"prepublish": "bun run sync-openapi && bun build:types && bun build:client",
+		"prepublish": "bun run sync-openapi && bun build:types && bun build:client && bun run build",
 		"----DATABASE----": "",
 		"db:migrate": "prisma migrate dev",
 		"db:studio": "prisma studio",
