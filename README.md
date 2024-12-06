@@ -23,10 +23,12 @@ const ctxStore = createClient();
 ```typescript
 const thread = await ctxStore.createThread();
 
-await ctxStore.addMessage(thread.id, {
-	role: "user",
-	content: "Hello, world!",
-});
+await ctxStore.createMessages(thread.id, [
+	{
+		role: "user",
+		content: "Hello, world!",
+	},
+]);
 ```
 
 4. Use together with AI SDK
@@ -35,5 +37,8 @@ await ctxStore.addMessage(thread.id, {
 const { text } = await generateText({
 	model: "gpt-4o",
 	messages: [{ role: "user", content: "Hello, world!" }],
+	onFinish: async ({ response }) => {
+		await ctxStore.createMessages(thread.id, response.messages);
+	},
 });
 ```
