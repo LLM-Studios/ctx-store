@@ -1,6 +1,6 @@
 {
 	"name": "@llmstudios/ctx-store",
-	"version": "1.0.57",
+	"version": "1.0.58",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "bun run --watch src/index.ts",
@@ -30,7 +30,8 @@
 	"files": [
 		"dist/server.js",
 		"dist/client.js",
-		"dist/client.d.ts"
+		"dist/client.d.ts",
+		"dist/generated"
 	],
 	"dependencies": {
 		"@elysiajs/eden": "^1.1.3",

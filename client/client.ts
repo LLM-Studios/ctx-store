@@ -3,7 +3,7 @@
 import { MessageRole } from "@prisma/client";
 import * as fetchClient from "./generated/index";
 
-const getThread = (threadId: string, includeMessages = true) => {
+const getThread = async (threadId: string, includeMessages = true) => {
 	return fetchClient
 		.getThread({
 			path: { threadId },
@@ -12,15 +12,15 @@ const getThread = (threadId: string, includeMessages = true) => {
 		.then((res) => res.data);
 };
 
-const listThreads = () => {
+const listThreads = async () => {
 	return fetchClient.listThreads().then((res) => res.data);
 };
 
-const createThread = (data?: { title?: string; metadata?: any }) => {
+const createThread = async (data?: { title?: string; metadata?: any }) => {
 	return fetchClient.createThread({ body: data ?? {} }).then((res) => res.data);
 };
 
-const updateThread = (
+const updateThread = async (
 	threadId: string,
 	data: { title?: string; metadata?: any }
 ) => {
@@ -32,7 +32,7 @@ const updateThread = (
 		.then((res) => res.data);
 };
 
-const deleteThread = (threadId: string) => {
+const deleteThread = async (threadId: string) => {
 	return fetchClient
 		.deleteThread({
 			path: { threadId },
@@ -40,7 +40,7 @@ const deleteThread = (threadId: string) => {
 		.then((res) => res.data);
 };
 
-const getMessage = (threadId: string, messageId: string) => {
+const getMessage = async (threadId: string, messageId: string) => {
 	return fetchClient
 		.getMessage({
 			path: { threadId, messageId },
@@ -48,7 +48,7 @@ const getMessage = (threadId: string, messageId: string) => {
 		.then((res) => res.data);
 };
 
-const listMessages = (
+const listMessages = async (
 	threadId: string,
 	options?: {
 		limit?: number;
@@ -65,7 +65,7 @@ const listMessages = (
 		.then((res) => res.data);
 };
 
-const addMessages = (
+const addMessages = async (
 	threadId: string,
 	data: {
 		role: MessageRole;
@@ -81,7 +81,7 @@ const addMessages = (
 		.then((res) => res.data);
 };
 
-const addUserMessage = (threadId: string, content: string) => {
+const addUserMessage = async (threadId: string, content: string) => {
 	return fetchClient
 		.createMessages({
 			body: [{ role: "user", content }],
@@ -90,7 +90,7 @@ const addUserMessage = (threadId: string, content: string) => {
 		.then((res) => res.data);
 };
 
-const addAssistantMessage = (threadId: string, content: string) => {
+const addAssistantMessage = async (threadId: string, content: string) => {
 	return fetchClient
 		.createMessages({
 			body: [{ role: "assistant", content }],
@@ -99,7 +99,7 @@ const addAssistantMessage = (threadId: string, content: string) => {
 		.then((res) => res.data);
 };
 
-const updateMessage = (
+const updateMessage = async (
 	threadId: string,
 	messageId: string,
 	data: {
@@ -115,7 +115,7 @@ const updateMessage = (
 		.then((res) => res.data);
 };
 
-const deleteMessage = (threadId: string, messageId: string) => {
+const deleteMessage = async (threadId: string, messageId: string) => {
 	return fetchClient
 		.deleteMessage({
 			path: { threadId, messageId },
