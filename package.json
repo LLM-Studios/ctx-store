@@ -1,6 +1,6 @@
 {
 	"name": "@llmstudios/ctx-store",
-	"version": "1.0.62",
+	"version": "1.0.63",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "bun run --watch src/index.ts",
@@ -10,7 +10,7 @@
 		"build:types": "tsc ./client/client.ts --declaration --emitDeclarationOnly --outDir ./dist --noEmitOnError --skipLibCheck",
 		"build:client": "bun build ./client/client.ts --outdir ./dist --target node --format esm",
 		"link": "bun run sync-openapi && bun build:types && bun build:client && bun run build && bun link",
-		"prepublish": "bun run sync-openapi && bun build:types && bun build:client && bun run build",
+		"prepublish": "bun run sync-openapi && bun build:types && bun build:client && bun run build && bun run build:start",
 		"start": "bun ./dist/server.js",
 		"start:services": "bun ./scripts/start.ts",
 		"----DATABASE----": "",
@@ -23,17 +23,18 @@
 		"docker:build": "docker build -t llmstudios/ctx-store:latest .",
 		"docker:push": "docker push llmstudios/ctx-store:latest",
 		"docker:publish": "npm run docker:build && npm run docker:push",
-		"docker:run": "docker run -p 3003:3003 llmstudios/ctx-store:latest"
+		"docker:run": "docker run -p 3003:3003 llmstudios/ctx-store:latest",
+		"build:start": "tsc scripts/start.ts --outDir dist/scripts --module ESNext --moduleResolution bundler --target ESNext"
 	},
 	"bin": {
-		"ctx-store": "./scripts/start.ts"
+		"ctx-store": "./dist/scripts/start.js"
 	},
 	"files": [
 		"dist/server.js",
 		"dist/client.js",
 		"dist/client.d.ts",
 		"dist/generated",
-		"scripts/start.ts",
+		"dist/scripts/start.js",
 		"docker-compose.yaml"
 	],
 	"dependencies": {
