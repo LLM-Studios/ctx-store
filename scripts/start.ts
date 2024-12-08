@@ -9,7 +9,7 @@ const main = async () => {
 
 	// Get the directory where the package is installed
 	const packageDir = new URL(".", import.meta.url).pathname;
-	const dockerComposePath = join(packageDir, "..", "docker-compose.yaml");
+	const dockerComposePath = join(packageDir, "../..", "docker-compose.yaml");
 
 	if (!existsSync(dockerComposePath)) {
 		console.error("Error: docker-compose.yaml not found at", dockerComposePath);
