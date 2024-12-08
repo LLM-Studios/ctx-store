@@ -1,7 +1,8 @@
 #!/usr/bin/env bun
 
-import { MessageRole } from "@prisma/client";
+import { Message, MessageRole, Thread } from "@prisma/client";
 import * as fetchClient from "./generated/index";
+import { ThreadWithMessages } from "./types";
 
 const getThread = async (threadId: string, includeMessages = true) => {
 	return fetchClient
@@ -9,11 +10,11 @@ const getThread = async (threadId: string, includeMessages = true) => {
 			path: { threadId },
 			query: { includeMessages },
 		})
-		.then((res) => res.data);
+		.then((res) => res.data as ThreadWithMessages);
 };
 
 const listThreads = async () => {
-	return fetchClient.listThreads().then((res) => res.data);
+	return fetchClient.listThreads().then((res) => res.data as Thread[]);
 };
 
 const createThread = async (data?: {
@@ -21,7 +22,9 @@ const createThread = async (data?: {
 	title?: string;
 	metadata?: any;
 }) => {
-	return fetchClient.createThread({ body: data ?? {} }).then((res) => res.data);
+	return fetchClient
+		.createThread({ body: data ?? {} })
+		.then((res) => res.data as Thread);
 };
 
 const updateThread = async (
@@ -33,7 +36,7 @@ const updateThread = async (
 			path: { threadId },
 			body: data,
 		})
-		.then((res) => res.data);
+		.then((res) => res.data as Thread);
 };
 
 const deleteThread = async (threadId: string) => {
@@ -41,7 +44,7 @@ const deleteThread = async (threadId: string) => {
 		.deleteThread({
 			path: { threadId },
 		})
-		.then((res) => res.data);
+		.then((res) => res.data as { success: boolean });
 };
 
 const getMessage = async (threadId: string, messageId: string) => {
@@ -49,7 +52,7 @@ const getMessage = async (threadId: string, messageId: string) => {
 		.getMessage({
 			path: { threadId, messageId },
 		})
-		.then((res) => res.data);
+		.then((res) => res.data as Message);
 };
 
 const listMessages = async (
@@ -66,7 +69,7 @@ const listMessages = async (
 			path: { threadId },
 			query: options,
 		})
-		.then((res) => res.data);
+		.then((res) => res.data as Message[]);
 };
 
 const addMessages = async (
@@ -83,7 +86,7 @@ const addMessages = async (
 			body: data,
 			path: { threadId },
 		})
-		.then((res) => res.data);
+		.then((res) => res.data as Message[]);
 };
 
 const addUserMessage = async (threadId: string, content: string) => {
@@ -92,7 +95,7 @@ const addUserMessage = async (threadId: string, content: string) => {
 			body: [{ role: "user", content }],
 			path: { threadId },
 		})
-		.then((res) => res.data);
+		.then((res) => res.data?.[(res.data?.length ?? 1) - 1] as Message);
 };
 
 const addAssistantMessage = async (threadId: string, content: string) => {
@@ -101,7 +104,7 @@ const addAssistantMessage = async (threadId: string, content: string) => {
 			body: [{ role: "assistant", content }],
 			path: { threadId },
 		})
-		.then((res) => res.data);
+		.then((res) => res.data?.[(res.data?.length ?? 1) - 1] as Message);
 };
 
 const updateMessage = async (
@@ -117,7 +120,7 @@ const updateMessage = async (
 			path: { threadId, messageId },
 			body: data,
 		})
-		.then((res) => res.data);
+		.then((res) => res.data as Message);
 };
 
 const deleteMessage = async (threadId: string, messageId: string) => {

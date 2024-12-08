@@ -187,6 +187,9 @@ export const threads = new Elysia({ prefix: "/threads" })
 		async ({ body }) => {
 			const thread = await db.thread.create({
 				data: body,
+				include: {
+					messages: true,
+				},
 			});
 			return thread;
 		},
