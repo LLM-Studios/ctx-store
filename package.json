@@ -1,6 +1,6 @@
 {
 	"name": "@llmstudios/ctx-store",
-	"version": "1.0.63",
+	"version": "1.0.64",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "bun run --watch src/index.ts",
@@ -24,7 +24,7 @@
 		"docker:push": "docker push llmstudios/ctx-store:latest",
 		"docker:publish": "npm run docker:build && npm run docker:push",
 		"docker:run": "docker run -p 3003:3003 llmstudios/ctx-store:latest",
-		"build:start": "tsc scripts/start.ts --outDir dist/scripts --module ESNext --moduleResolution bundler --target ESNext"
+		"build:start": "bun build --target node --outfile ./dist/scripts/start.js ./scripts/start.ts"
 	},
 	"bin": {
 		"ctx-store": "./dist/scripts/start.js"
