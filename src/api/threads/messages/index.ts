@@ -122,11 +122,10 @@ export const messages = new Elysia({ prefix: "/messages" })
 			body: t.Array(
 				t.Object({
 					id: t.Optional(
-						t
-							.String({
-								description: "ID of the message.",
-							})
-							.uuid()
+						t.String({
+							description: "ID of the message.",
+							format: "uuid",
+						})
 					),
 					role: t.Union(
 						[
