@@ -42,6 +42,10 @@ export type ListMessagesError = unknown;
 export type CreateMessagesData = {
     body: Array<{
         /**
+         * ID of the message.
+         */
+        id?: string;
+        /**
          * The role of the message sender (function, user, system, assistant, data, tool).
          */
         role: ("function" | "user" | "system" | "assistant" | "data" | "tool");
@@ -174,7 +178,7 @@ export type GetThreadResponse = ({
     createdAt: (Date | string | number);
     updatedAt: (Date | string | number);
     metadata?: (unknown | null);
-    Messages: Array<{
+    messages: Array<{
         id: string;
         threadId: string;
         content: unknown;
@@ -259,7 +263,7 @@ export type ListThreadsResponse = (Array<{
     updatedAt: (Date | string | number);
     metadata?: (unknown | null);
     _count: {
-        Messages: number;
+        messages: number;
     };
 }>);
 
@@ -267,6 +271,10 @@ export type ListThreadsError = unknown;
 
 export type CreateThreadData = {
     body: {
+        /**
+         * ID of the thread.
+         */
+        id?: string;
         /**
          * Title of the thread.
          */

@@ -31,7 +31,7 @@ export const ThreadSchema = t.Object({
 export const ThreadWithMessagesSchema = t.Composite([
 	ThreadSchema,
 	t.Object({
-		Messages: t.Array(MessageSchema),
+		messages: t.Array(MessageSchema),
 	}),
 ]);
 
@@ -39,7 +39,7 @@ export const ThreadWithMessageCountSchema = t.Composite([
 	ThreadSchema,
 	t.Object({
 		_count: t.Object({
-			Messages: t.Number(),
+			messages: t.Number(),
 		}),
 	}),
 ]);

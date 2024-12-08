@@ -20,7 +20,7 @@ model Thread {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   metadata  Json?
-  Messages  Message[]
+  messages  Message[]
 }
 
 enum MessageRole {
@@ -41,5 +41,5 @@ model Message {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
 
-  Thread Thread @relation(fields: [threadId], references: [id])
+  thread Thread @relation(fields: [threadId], references: [id])
 }

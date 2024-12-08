@@ -1,32 +1,13 @@
-
-
-export interface Message {
-  id: string;
-  threadId: string;
-  content: unknown;
-}
+import type { CoreMessage } from "ai";
 
 export interface Thread {
-  Messages: Array<{
-      id: string;
-      threadId: string;
-      content: unknown;
-      role: ("function" | "user" | "system" | "assistant" | "data" | "tool");
-      createdAt: (Date | string | number);
-      updatedAt: (Date | string | number);
-      metadata?: (unknown | null);
-  }>;
+	id: string;
+	title?: string;
+	metadata?: Record<string, any>;
+	createdAt: Date;
+	updatedAt: Date;
 }
 
 export interface ThreadWithMessages extends Thread {
-  Messages: Array<{
-      id: string;
-      threadId: string;
-      content: unknown;
-      role: ("function" | "user" | "system" | "assistant" | "data" | "tool");
-      createdAt: (Date | string | number);
-      updatedAt: (Date | string | number);
-      metadata?: (unknown | null);
-  }>;
+	messages: CoreMessage[];
 }
-

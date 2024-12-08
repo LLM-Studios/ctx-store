@@ -17,10 +17,10 @@ const thread = new Elysia({ prefix: "/:threadId" })
 
 				include: {
 					_count: {
-						select: { Messages: true },
+						select: { messages: true },
 					},
 					...(query.includeMessages && {
-						Messages: {
+						messages: {
 							orderBy: {
 								createdAt: "desc",
 							},
@@ -139,7 +139,7 @@ export const threads = new Elysia({ prefix: "/threads" })
 				take: limit,
 				include: {
 					_count: {
-						select: { Messages: true },
+						select: { messages: true },
 					},
 				},
 			});
