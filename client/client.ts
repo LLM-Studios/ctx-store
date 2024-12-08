@@ -16,7 +16,11 @@ const listThreads = async () => {
 	return fetchClient.listThreads().then((res) => res.data);
 };
 
-const createThread = async (data?: { title?: string; metadata?: any }) => {
+const createThread = async (data?: {
+	id?: string;
+	title?: string;
+	metadata?: any;
+}) => {
 	return fetchClient.createThread({ body: data ?? {} }).then((res) => res.data);
 };
 
@@ -68,6 +72,7 @@ const listMessages = async (
 const addMessages = async (
 	threadId: string,
 	data: {
+		id?: string;
 		role: MessageRole;
 		content: any;
 		metadata?: any;

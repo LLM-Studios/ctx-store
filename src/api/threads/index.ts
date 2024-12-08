@@ -192,6 +192,11 @@ export const threads = new Elysia({ prefix: "/threads" })
 		},
 		{
 			body: t.Object({
+				id: t.Optional(
+					t.String({
+						description: "ID of the thread.",
+					})
+				),
 				title: t.Optional(
 					t.String({
 						description: "Title of the thread.",

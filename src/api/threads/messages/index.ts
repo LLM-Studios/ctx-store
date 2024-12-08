@@ -97,6 +97,7 @@ export const messages = new Elysia({ prefix: "/messages" })
 		async ({ params, body }) => {
 			const newMessagesCount = await db.message.createMany({
 				data: body.map((message, i) => ({
+					id: message.id,
 					content: message.content,
 					role: message.role,
 					metadata: message.metadata,
@@ -120,6 +121,13 @@ export const messages = new Elysia({ prefix: "/messages" })
 		{
 			body: t.Array(
 				t.Object({
+					id: t.Optional(
+						t
+							.String({
+								description: "ID of the message.",
+							})
+							.uuid()
+					),
 					role: t.Union(
 						[
 							t.Literal("function"),
