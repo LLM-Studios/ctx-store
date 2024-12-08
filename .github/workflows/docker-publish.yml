@@ -60,7 +60,10 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: dist
-          path: dist/
+          path: |
+            dist/
+            scripts/start.ts
+            docker-compose.yaml
 
   publish-npm:
     needs: [build-and-test, check-version]
@@ -95,7 +98,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: dist
-          path: dist/
+          path: ./
 
       - name: Publish to npm
         run: npm publish --provenance --access public
@@ -119,7 +122,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: dist
-          path: dist/
+          path: ./
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
