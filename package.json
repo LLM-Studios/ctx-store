@@ -1,11 +1,11 @@
 {
 	"name": "@llmstudios/ctx-store",
-	"version": "1.0.69",
+	"version": "1.0.70",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "bun run --watch src/index.ts",
 		"sync-openapi": "bun scripts/sync-openapi.ts",
-		"build": "bun build --outfile ./dist/server.js ./src/index.ts",
+		"build": "bun build --target node --outfile ./dist/server.js ./src/index.ts",
 		"build:executable": "bun build --compile --target bun --outfile ./dist/server ./src/index.ts",
 		"build:types": "tsc ./client/client.ts --declaration --emitDeclarationOnly --outDir ./dist --noEmitOnError --skipLibCheck",
 		"build:client": "bun build ./client/client.ts --outdir ./dist --target node --format esm",
