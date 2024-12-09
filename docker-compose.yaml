@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   api:
-    image: ghcr.io/llm-studios/ctx-store:main
+    image: ghcr.io/llm-studios/ctx-store:latest
     ports:
       - "3003:3003"
     environment:
