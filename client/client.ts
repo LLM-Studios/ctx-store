@@ -1,8 +1,7 @@
 #!/usr/bin/env bun
 
-import { Message, MessageRole, Thread } from "@prisma/client";
 import * as fetchClient from "./generated/index";
-import { ThreadWithMessages } from "./types";
+import type { ThreadWithMessages, Message, Thread } from "./types";
 
 const getThread = async (threadId: string, includeMessages = true) => {
 	return fetchClient
