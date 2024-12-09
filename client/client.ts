@@ -75,7 +75,7 @@ const addMessages = async (
 	threadId: string,
 	data: {
 		id?: string;
-		role: MessageRole;
+		role: "user" | "assistant" | "system" | "function" | "tool" | "data";
 		content: any;
 		metadata?: any;
 	}[]
