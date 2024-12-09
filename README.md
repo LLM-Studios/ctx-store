@@ -42,3 +42,5 @@ const { text } = await generateText({
 	},
 });
 ```
+
+https://llmstudios.de/
